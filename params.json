@@ -1,1 +1,7 @@
-{"name":"sweetCheckbox","tagline":"Jquery pugin for wrapping standard html checkboxes and style them with a fancy theme BUT still having the default behavior of a normal Input","body":"sweetCheckbox\r\n==============\r\n\r\nJquery pugin for wrapping standard html checkboxes and style them with a fancy theme BUT still having the default behavior of a normal Input.\r\nDoes not require extra css files or png files.","google":"UA-39159125-1","note":"Don't delete this file! It's used internally to help with page regeneration."}
+{
+  "name": "sweetCheckbox",
+  "tagline": "Jquery pugin for wrapping standard html checkboxes and style them with a fancy theme BUT still having the default behavior of a normal Input",
+  "body": "sweetCheckbox\r\n==============\r\n\r\nJquery pugin for wrapping standard html checkboxes and style them with a fancy theme BUT still having the default behavior of a normal Input.\r\nDoes not require extra css files or png files.",
+  "google": "UA-39159125-1",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
