@@ -1,59 +1,167 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>sweetCheckbox by rafaelchiti</title>
-  </head>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-  <body>
-    <div id="container">
-      <div class="inner">
+  <script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
+  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js" type="text/javascript"></script>
+  <script src="https://raw.github.com/rafaelchiti/sweetCheckbox/develop/sweetCheckbox.js" type="text/javascript"></script>
 
-        <header>
-          <h1>sweetCheckbox</h1>
-          <h2>Jquery pugin for wrapping standard html checkboxes and style them with a fancy theme BUT still having the default behavior of a normal Input</h2>
-        </header>
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <title>sweetCheckbox by rafaelchiti</title>
+</head>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/rafaelchiti/sweetCheckbox/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/rafaelchiti/sweetCheckbox/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/rafaelchiti/sweetCheckbox" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+<body>
+  <div id="container">
+    <div class="inner">
+
+      <header>
+        <h1>sweetCheckbox</h1>
+        <h2>
+          Jquery plugin for wrapping standard html checkboxes and style them with
+          a nice theme BUT still having the default behavior of a normal Input
+        </h2>
+      </header>
+
+      <section id="downloads" class="clearfix">
+        <a href="https://github.com/rafaelchiti/sweetCheckbox/zipball/master"
+          id="download-zip" class="button">
+
+          <span>Download .zip</span>
+        </a>
+
+        <a href="https://github.com/rafaelchiti/sweetCheckbox/tarball/master"
+          id="download-tar-gz" class="button">
+
+          <span>Download .tar.gz</span>
+        </a>
+
+        <a href="https://github.com/rafaelchiti/sweetCheckbox"
+          id="view-on-github" class="button">
+
+          <span>View on GitHub</span>
+        </a>
+      </section>
+
+      <hr>
+
+      <section id="main_content">
+        <h1>WHAT?</h1>
+        <p>
+          <p>
+            - Are you looking for a checkbox that looks nice and the same on all
+            the standard browsers?
+          <p>
+          <p>
+            - Do you want to use the checkbox as you usually do, without an strange
+            plugin API or special methods for checking it or getting the value?
+          </p>
+          <p>
+            Thats it, sweet checkbox is not more than that, a simple plugin that
+            tries to play well with standard html checkboxes.
+          </p>
+        </p>
 
         <hr>
 
-        <section id="main_content">
-          <h1>sweetCheckbox</h1>
+        <h1>HOW?</h1>
+        <p>
+          <h4>Default</h4>
+          &lt;input type='checkbox' id='check1'&gt;
+          <br>
+          $('#check1').sweetCheckbox();
+          <br><br>
+          <input type="checkbox" id="check1">
+          <script>$('#check1').sweetCheckbox();</script>
+        </p>
 
-<p>Jquery pugin for wrapping standard html checkboxes and style them with a fancy theme BUT still having the default behavior of a normal Input.
-Does not require extra css files or png files.</p>
-        </section>
+        <p>
+          <h4>Medium Size</h4>
+          &lt;input type='checkbox' id='check2'&gt;
+          <br>
+          $('#check2').sweetCheckbox({size: 'medium'});
+          <br><br>
+          <input type="checkbox" id="check2">
+          <script>$('#check2').sweetCheckbox({size: 'medium'});</script>
+        </p>
 
-        <footer>
-          sweetCheckbox is maintained by <a href="https://github.com/rafaelchiti">rafaelchiti</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+        <p>
+          <h4>Large Size</h4>
+          &lt;input type='checkbox' id='check3'&gt;
+          <br>
+          $('#check3').sweetCheckbox({size: 'large'});
+          <br><br>
+          <input type="checkbox" id="check3">
+          <script>$('#check3').sweetCheckbox({size: 'large'});</script>
+        </p>
 
-                  <script type="text/javascript">
+        <p>
+          <h4>Custom Size</h4>
+          &lt;input type='checkbox' id='check4'&gt;
+          <br>
+          $('#check4').sweetCheckbox({width: '300', height: '50'});
+          <br><br>
+          <input type="checkbox" id="check4">
+          <script>$('#check4').sweetCheckbox({width: '300', height: '50'});</script>
+        </p>
+
+        <p>
+          <h4>Custom Text</h4>
+          &lt;input type='checkbox' id='check5'&gt;
+          <br>
+          $('#check5').sweetCheckbox({onText: '1', offText: '0'});
+          <br><br>
+          <input type="checkbox" id="check5">
+          <script>$('#check5').sweetCheckbox({onText: '1', offText: '0'});</script>
+        </p>
+
+        <br>
+        <br>
+        <br>
+
+
+        <hr>
+
+        <h1>WHO?</h1>
+        <p>
+          <a href="https://github.com/rafaelchiti">Rafael Chiti</a>
+          <br/>
+          <a href="https://github.com/octanko">Octavio Pochiero</a>
+        </p>
+
+
+      </section>
+
+      <footer>
+        sweetCheckbox is maintained by
+        <a href="https://github.com/rafaelchiti">rafaelchiti</a>
+        <br>
+        This page was generated by
+        <a href="http://pages.github.com">GitHub Pages</a>
+        . Tactile theme by
+        <a href="http://twitter.com/jasonlong">Jason Long</a>
+        .
+      </footer>
+
+      <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
-          <script type="text/javascript">
+      <script type="text/javascript">
             try {
               var pageTracker = _gat._getTracker("UA-39159125-1");
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
 
-      </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
