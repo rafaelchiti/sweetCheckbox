@@ -25,12 +25,14 @@
   $.fn.sweetCheckbox = function(method) {
 
      // Method calling logic
-    if ( methods[method] ) {
-      return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-    } else if ( typeof method === 'object' || ! method ) {
-      return methods.init.apply( this, arguments );
+    if (methods[method]) {
+      return methods[ method ]
+        .apply(this, Array.prototype.slice.call(arguments, 1));
+
+    } else if (typeof method === 'object' || ! method) {
+      return methods.init.apply(this, arguments);
     } else {
-      $.error( 'Method ' +  method + ' does not exist on jQuery.sweetCheckbox' );
+      $.error('Method ' +  method + ' does not exist on jQuery.sweetCheckbox');
     }
   };
 
@@ -53,18 +55,34 @@
   // using the input as the starting point.
   var domHelpers = {
     wrapper: function($input) {
-      return $input.closest('.sc-wrapper');
+      return $input.closest('.sc-sweet-checkbox-container');
     },
 
     fakeCheckbox: function($input) {
       return $input.siblings('.sc-fake-checkbox');
     },
 
-    ball: function($input) {
-      return this.fakeCheckbox($input).find('.sc-ball');
+    switchButton: function($input) {
+      return this.fakeCheckbox($input).find('.sc-switch');
     },
 
-    checkboxText: function($input) {
+    backgroundWrapper: function($input) {
+      return this.fakeCheckbox($input).find('.sc-background-wrapper');
+    },
+
+    backgroundOn: function($input) {
+      return this.fakeCheckbox($input).find('.sc-background-on');
+    },
+
+    textOn: function($input) {
+      return this.fakeCheckbox($input).find('.sc-text-on');
+    },
+
+    textOff: function($input) {
+      return this.fakeCheckbox($input).find('.sc-text-off');
+    },
+
+    texts: function($input) {
       return this.fakeCheckbox($input).find('.sc-text');
     }
   };
@@ -74,8 +92,12 @@
     var settings = dataHelper.settings($input);
     var $checkboxWrapper = domHelpers.wrapper($input);
     var $fakeCheckbox = domHelpers.fakeCheckbox($input);
-    var $ball = domHelpers.ball($input);
-    var $text = domHelpers.checkboxText($input);
+    var $switchButton = domHelpers.switchButton($input);
+    var $backgroundWrapper = domHelpers.backgroundWrapper($input);
+    var $backgroundOn = domHelpers.backgroundOn($input);
+    var $textOn = domHelpers.textOn($input);
+    var $textOff = domHelpers.textOff($input);
+    var $texts = domHelpers.texts($input);
 
     $checkboxWrapper.css({
       'width': settings.width,
@@ -85,28 +107,54 @@
     });
     $checkboxWrapper.addClass(settings.wrapperClass);
 
-
-    // Just setting some text in order to be able to measure the height
-    $text.text(settings.offText);
-    $text.css({
-      'position': 'absolute',
-      'font-size': settings.fontSize,
-      'font-family': 'Helvetica, Arial, sans-serif',
-      'font-weight': 'bold',
-      'color': 'rgba(1,1,1, 0.5)',
-    });
-    $text.css({
-      'top': (settings.height / 2) - ($text.height() / 2)
-    });
-
     $fakeCheckbox.css({
       'width': settings.width,
       'height': settings.height,
+      'position': 'relative',
+    });
+
+    $backgroundWrapper.css({
+      'position': 'relative',
+      'overflow': 'hidden',
+      'width': settings.width,
+      'height': settings.height,
+      'border-radius': '39px',
+      'background-color': '#DC7F6D',
+      'box-shadow': '1px 1px 3px 1px rgba(1,1,1,.2) inset'
+    });
+
+    $backgroundOn.css({
+      'height': settings.height,
+      'width': settings.width,
+      'position': 'absolute',
+      'background-color': '#9EC369',
+      'top': '0px',
       'box-shadow': '1px 1px 3px 1px rgba(1,1,1,.2) inset',
       'border-radius': '39px'
     });
 
-    $ball.css({
+    $texts.css({
+      'position': 'absolute',
+      'color': 'rgba(1,1,1, 0.5)',
+      'font-size': settings.fontSize,
+      'font-family': 'Helvetica, Arial, sans-serif',
+      'font-weight': 'bold'
+    });
+
+    $textOn.text(settings.onText);
+    $textOn.css({
+      'top': (settings.height / 2) - ($textOn.height() / 2),
+      'left': settings.height / 2
+    });
+
+    $textOff.text(settings.offText);
+    $textOff.css({
+      'top': (settings.height / 2) - ($textOff.height() / 2),
+      'right': settings.height / 2
+    });
+
+
+    $switchButton.css({
       'width': $fakeCheckbox.height() + 4,
       'height': $fakeCheckbox.height() + 4,
       'box-shadow': '-13px -14px 25px -23px rgba(1,1,1,.2) inset,' +
@@ -125,47 +173,70 @@
     $input.addClass(settings.inputClass);
 
     if ($input.is(':checked'))
-      styleAsChecked($input);
+      styleAsChecked($input, 0);
     else
-      styleAsUnchecked($input);
+      styleAsUnchecked($input, 0);
 
   };
 
   // Private: Apply the required styles to make it look as unchecked
-  function styleAsUnchecked($input) {
+  function styleAsUnchecked($input, duration) {
     var settings = dataHelper.settings($input);
     var $fakeCheckbox = domHelpers.fakeCheckbox($input);
-    var $ball = domHelpers.ball($input);
-    var $text = domHelpers.checkboxText($input);
+    var $backgroundWrapper = domHelpers.backgroundWrapper($input);
+    var $backgroundOn = domHelpers.backgroundOn($input);
+    var $switchButton = domHelpers.switchButton($input);
+    var $textOn = domHelpers.textOn($input);
+    var $textOff = domHelpers.textOff($input);
 
-    var leftPosForBall =  - ($ball.width() / 3.5);
+    if (duration === undefined) {
+      duration = 'normal';
+    }
 
-    $text.text(settings.offText);
-    $text.css({
-      'left': leftPosForBall + $ball.width() + 3
-    });
+    $backgroundOn.animate({
+      width: 0
+    }, duration);
 
-    $fakeCheckbox.animate({'background-color': '#DC7F6D'});
-    $ball.animate({'left': leftPosForBall});
+    $textOff.animate({
+      right: settings.height / 2
+    }, duration);
+
+    $textOn.animate({
+      left: - $textOff.width()
+    }, duration);
+
+    var leftPosForBall =  - ($switchButton.width() / 3.5);
+    $switchButton.animate({'left': leftPosForBall}, duration);
   }
 
   // Private: Apply the required styles to make it look as checked
-  function styleAsChecked($input) {
+  function styleAsChecked($input, duration) {
     var settings = dataHelper.settings($input);
     var $fakeCheckbox = domHelpers.fakeCheckbox($input);
-    var $ball = domHelpers.ball($input);
-    var $text = domHelpers.checkboxText($input);
+    var $backgroundOn = domHelpers.backgroundOn($input);
+    var $backgroundWrapper = domHelpers.backgroundWrapper($input);
+    var $switchButton = domHelpers.switchButton($input);
+    var $textOn = domHelpers.textOn($input);
+    var $textOff = domHelpers.textOff($input);
 
-    var leftPosForBall = $fakeCheckbox.width() - ($ball.width() / 1.5);
+    if (duration === undefined) {
+      duration = 'normal';
+    }
 
-    $text.text(settings.onText);
-    $text.css({
-      'left': leftPosForBall - $text.width() - 3
-    });
+    $backgroundOn.animate({
+      width: settings.width
+    }, duration);
 
-    $fakeCheckbox.animate({'background-color': '#9EC369'});
+    $textOff.animate({
+      right: - $textOff.width()
+    }, duration);
+    $textOn.animate({
+      left: settings.height / 2
+    }, duration);
 
-    $ball.animate({'left': leftPosForBall + 'px'});
+
+    var leftPosForBall = $fakeCheckbox.width() - ($switchButton.width() / 1.5);
+    $switchButton.animate({'left': leftPosForBall + 'px'}, duration);
   };
 
   // Private: Handler for the change event on the input
@@ -179,18 +250,22 @@
   };
 
   function bootstrapHTML($input) {
-    $input.wrap('<div class="sc-wrapper">');
+    $input.wrap('<div class="sc-sweet-checkbox-container">');
 
-    var $checkboxWrapper = $input.closest('.sc-wrapper');
+    var $sweetCheckboxContainer = $input.closest('.sc-sweet-checkbox-container');
 
     var $fakeCheckbox = $(
       '<div class="sc-fake-checkbox">' +
-        '<span class="sc-text"></span>' +
-        '<div class="sc-ball">' +
+        '<div class="sc-background-wrapper">' +
+          '<div class="sc-background-on"></div>'+
+          '<span class="sc-text-on sc-text"></span>' +
+          '<span class="sc-text-off sc-text"></span>' +
+        '</div>' +
+        '<div class="sc-switch">' +
       '</div>'
     );
 
-    $checkboxWrapper.prepend($fakeCheckbox);
+    $sweetCheckboxContainer.prepend($fakeCheckbox);
   };
 
   // Private: Bind all the required events to the component
@@ -211,7 +286,7 @@
   // Private: Remove all the events in order to be able to destroy the component
   // without leaving any reference.
   function unbindEvents($input) {
-    var $checkboxWrapper = $input.closest('.sc-wrapper');
+    var $checkboxWrapper = domHelpers.wrapper($input);
     $checkboxWrapper.off('.sweetCheckbox');
     $input.off('.sweetCheckbox');
   }

@@ -4,16 +4,25 @@
   <meta charset='utf-8'>
 
   <script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
-  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js" type="text/javascript"></script>
-  <script src="https://raw.github.com/rafaelchiti/sweetCheckbox/develop/sweetCheckbox.js" type="text/javascript"></script>
+  <script src="sweetCheckbox.js" type="text/javascript"></script>
+
+  <style type="text/css">
+
+    .sc-sweet-checkbox-container {
+      margin-bottom: 20px;
+      margin-left: 20px;
+    }
+
+  </style>
 </head>
 
 <body>
 
-  <input type="checkbox" id="check1">
+  <input type="checkbox" id="c1">
+
 
   <script>
-    $('#check1').sweetCheckbox();
+    $('input[type=checkbox]').sweetCheckbox({size: 'medium'});
   </script>
 
 </body>
