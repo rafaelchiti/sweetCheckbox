@@ -110,7 +110,7 @@
     $fakeCheckbox.css({
       'width': settings.width,
       'height': settings.height,
-      'position': 'relative',
+      'position': 'relative'
     });
 
     $backgroundWrapper.css({
