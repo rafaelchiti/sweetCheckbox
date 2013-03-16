@@ -130,7 +130,8 @@
       'background-color': '#9EC369',
       'top': '0px',
       'box-shadow': '1px 1px 3px 1px rgba(1,1,1,.2) inset',
-      'border-radius': '39px'
+      'border-radius': '39px',
+      'transition': 'width .5s'
     });
 
     $texts.css({
@@ -138,7 +139,8 @@
       'color': 'rgba(1,1,1, 0.5)',
       'font-size': settings.fontSize,
       'font-family': 'Helvetica, Arial, sans-serif',
-      'font-weight': 'bold'
+      'font-weight': 'bold',
+      'transition': 'left .5s, right .5s'
     });
 
     $textOn.text(settings.onText);
@@ -163,7 +165,8 @@
       'background-color': 'white',
       'border-radius': '50%',
       'border': '1px solid rgba(1,1,1,.1)',
-      'top': '-3px'
+      'top': '-3px',
+      'transition': 'left .5s'
     });
 
     $input.css({
@@ -193,20 +196,20 @@
       duration = 'normal';
     }
 
-    $backgroundOn.animate({
-      width: 0
-    }, duration);
+    $backgroundOn.css({
+      width: '0px'
+    });
 
-    $textOff.animate({
+    $textOff.css({
       right: settings.height / 2
-    }, duration);
+    });
 
-    $textOn.animate({
+    $textOn.css({
       left: - $textOff.width()
-    }, duration);
+    });
 
     var leftPosForBall =  - ($switchButton.width() / 3.5);
-    $switchButton.animate({'left': leftPosForBall}, duration);
+    $switchButton.css({'left': leftPosForBall});
   }
 
   // Private: Apply the required styles to make it look as checked
@@ -223,20 +226,20 @@
       duration = 'normal';
     }
 
-    $backgroundOn.animate({
+    $backgroundOn.css({
       width: settings.width
-    }, duration);
+    });
 
-    $textOff.animate({
+    $textOff.css({
       right: - $textOff.width()
-    }, duration);
-    $textOn.animate({
+    });
+    $textOn.css({
       left: settings.height / 2
-    }, duration);
+    });
 
 
     var leftPosForBall = $fakeCheckbox.width() - ($switchButton.width() / 1.5);
-    $switchButton.animate({'left': leftPosForBall + 'px'}, duration);
+    $switchButton.css({'left': leftPosForBall + 'px'});
   };
 
   // Private: Handler for the change event on the input
